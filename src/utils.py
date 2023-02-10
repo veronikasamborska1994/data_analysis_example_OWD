@@ -16,7 +16,7 @@ def load_police_data():
         2) ID of the officer involved
         3) Total complaints on the case '''
 
-	path_to_data = 'https://raw.githubusercontent.com/veronikasamborska1994/data_analysis_example_OWD/master/met-police-complaints.csv'
+	path_to_data = 'https://raw.githubusercontent.com/veronikasamborska1994/data_analysis_example_OWD/master/data/met-police-complaints.csv'
 	read_pol_data = pd.read_csv(path_to_data); column_names = read_pol_data.keys()
 	case_ref = read_pol_data[column_names[0]]; officer_id = read_pol_data[column_names[1]]
 	complaints_per_case = read_pol_data[column_names[2]]
