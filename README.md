@@ -100,4 +100,7 @@ This means that high % of cases accounted by the top decile can also mean that t
 
 ## Major statistical issues and Summary
 
-ajkfhadkhkjga
+summary sentence here
+
+![](figures/simulating_complaints_with_beta_distributions.png)  
+> summary caption here
