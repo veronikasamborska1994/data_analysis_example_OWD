@@ -17,14 +17,29 @@ Firstly, as a sanity check, we will simply visualise the data to ensure there ar
 
 </details>
 
+<details>
+<summary>Officer complaints ranked by decile</summary>
+<br>
+
+Here, I will group the MET officers into deciles as in the original article. It looks like we are more or less replicating the results that top 10% of the officers are accruing a disproportionate number of complaints. As mentioned earlier, we do not have a baseline for how many cases each officer worked on so this plot is confounded and should not be interpreted as 'top % of officers are disproportionally more likely to receive complaints'. For the next step, let's assume (although this is likely to be an oversimplification) that each officer has a uniform probability of receiving a complaint.
+
+![](figures/officer_complaints_by_decile.png)
+
+</details>
+
+<details>
+<summary>Simulation for a case where all officers have an equal probability of receiving a complaint</summary>
+<br>
+
+We can quickly find out that there are [32,493 officers](https://en.wikipedia.org/wiki/Metropolitan_Police) at the London MET, and from our dataset we can calculate that there were 58,147 complaints received in the past 5 years. So, on average, each year there were 0.36 complaints per officer. With these two numbers, we can simulate the simplest case where each officer has an equal probability of receiving a complaint by drawing samples from a Poisson distribution (because complaints are discrete events) with an expected number of 0.36 per year.
+
+![](figures/officer_complaints_simulated_vs_empirical_data.png)
+> Even if all officers were equally likely to receive a complaint the resulting distribution would look exponential.
+  
+In simulated data where all officers have an equal chance of getting a complaint the top decile is responsible for a lower number of complaints (20%) than in the real data (28%) but the distribution still looks exponential. This suggests that there is a major problem in interpreting these kinds of plots.
+
+</details>
+
+## Major statistical issues and Summary
 
 
-
-
-## Major statistical issues
-
-dafkjhajk
-
-## Summary
-
-sfkalkjdglkj
