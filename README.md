@@ -67,7 +67,7 @@ Now let's simulate a case where each decile of police officers has a different c
 
 As we do not know the baseline number of cases each officer has worked on from our data, we cannot actually assume that the probabilities of receiving a comlaint in each decile are proportional to the ratios in % of complaints received in each decile. So let's model some other probability distributions of complaints across officers and see what the resulting % of complaints per decile plot looks like. We can use a beta distribution (with shape parameters a and b) to generate various probability distributions of complaints.
 
-![](figures/simulating_complaints_with_beta_distributions.png)  
+![](figures/simulating_complaints_with_beta_distributions_FINAL.png)  
 
 </details>
 
@@ -102,5 +102,5 @@ This means that high % of cases accounted by the top decile can also mean that t
 
 summary sentence here
 
-![](figures/simulating_complaints_with_beta_distributions.png)  
+![](figures/simulating_complaints_with_beta_distributions_FINAL.png)  
 > summary caption here
