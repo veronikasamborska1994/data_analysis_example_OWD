@@ -100,7 +100,7 @@ This means that high % of cases accounted by the top decile can also mean that t
 
 ## Major statistical issues and Summary
 
-> Higher % of cases accounted by the top decile of officers with the most complaints can also mean that the police force is in fact receiving lower number of complaints, including the officers in the top decile.  
+> Higher % of cases accounted by the top decile of officers with the most complaints can also mean that the police force is in fact receiving lower number of complaints, including the officers in the top decile. These plots should not be used to draw conclusions that 'small share of US police draw third of complaints'. Instead, data should always include the number of cases each officer works on and how many complaints they receive. This would allow us to estimate a probability of complaint for each officer and only then look for outliers, or deviations from what would be expected by chance.
 
 ![](figures/simulating_complaints_with_beta_distributions_FINAL.png)  
 
