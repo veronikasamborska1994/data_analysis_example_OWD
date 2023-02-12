@@ -51,6 +51,53 @@ Now let's simulate a case where each decile of police officers has a different c
 
 </details>
 
+<details>
+<summary>Simulating a case where the probabilities of receiving a comlaint in each decile are proportional to the ratios in % of complaints received in each decile in MET data</summary>
+<br>
+
+Now let's simulate a case where each decile of police officers has a different chance of receiving a complaint. Here, the probability distribution is proportional to the distribution of the % of complaints in each decile in the MET data. Officers in the top decile will on average have at least one complaint a year. The resulting simulated distribution starts to match the real data much more closely. This suggests it is in fact possible that some officers are more likely to receive a complaint than others (this can be thought of as some model of [preferential attachment](https://en.wikipedia.org/wiki/Preferential_attachment)).
+
+![](figures/officer_complaints_simulated_vs_empirical_precferential_attachment.png)  
+
+</details>
+
+<details>
+<summary>Simulating complaint data with beta distributions</summary>
+<br>
+
+As we do not know the baseline number of cases each officer has worked on from our data, we cannot actually assume that the probabilities of receiving a comlaint in each decile are proportional to the ratios in % of complaints received in each decile. So let's model some other probability distributions of complaints across officers and see what the resulting % of complaints per decile plot looks like. We can use a beta distribution (with shape parameters a and b) to generate various probability distributions of complaints.
+
+![](figures/simulating_complaints_with_beta_distributions.png)  
+
+</details>
+
+<details>
+<summary>Simulating complaint data with probability distributions with an average probability of complaints matching the data</summary>
+<br>
+
+We can now look at the possible % values of complaints accounted by the top decile under various probability distributions. First, we can select values from simulations that would approximate some of the known conditions in our data - it took 5 years for the MET to achieve a total # of complaints 58129 and there was an average of 0.36 complaints per officer. We can see that under these conditions higher averages in complaints in the the top decile will result in the top percentile accounting for a higher proportion of all complaints.
+
+However, this is accompanied by the fact that complaints in the bottom 90 % of the officers will decrease as the number of average complaints in the top decile increases.
+
+![](figures/simulating_complaints_with_mean_matched_distributions.png)  
+
+</details>
+
+<details>
+<summary>The % of complaints received by the top decile increases exponentially as the average complaints in the police force decreases</summary>
+<br>
+
+Finally, let's plot the % of complaints accounted by the top decile from all of our simulated probability distributions of complaints. Overall, there is a negative exponential relathionship between % of complaints received in the top decile and the rates of police complaints.
+
+This means that high % of cases accounted by the top decile can also mean that the police force is in fact receiving fewer complaints.
+
+![](figures/complaints_top_decile_vs_complaints_total.png)  
+
+</details>
+
+
+
+
 ## Major statistical issues and Summary
 
-
+ajkfhadkhkjga
