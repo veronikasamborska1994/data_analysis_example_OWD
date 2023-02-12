@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import tqdm
-import time
 import seaborn as sns
+
 
 def default_plotting_params() -> None:
     sns.set()
@@ -92,7 +92,7 @@ def get_decile_data(srt_cases: np.ndarray, srt_ids: np.ndarray):
     return np.asarray(deciles_sums)
 
 
-def simulate_decile_data(unif_prob: float, tot_complaints: int, n_total_officers: int):
+def simulate_decile_data(unif_prob: float,tot_complaints: int, n_total_officers: int):
     """
     Simulates the distribution of complaints across officers for a given uniform probability distribution, using Poisson simulation.
 
@@ -111,6 +111,7 @@ def simulate_decile_data(unif_prob: float, tot_complaints: int, n_total_officers
         An array of the sum of complaints for each decile (10th percentile range) of officers in the simulation (np.ndarray).
     
     """
+
     target_total = 0; poisson = [] 
     while target_total < tot_complaints or target_total == tot_complaints: # simulate poisson distributions until we achieve a total # of complaints
         poisson.append(np.random.poisson(unif_prob,n_total_officers)) # draw samples from a possion distribution
@@ -133,10 +134,10 @@ def simulate_decile_data(unif_prob: float, tot_complaints: int, n_total_officers
     
 
 
-def simulate_non_uniform(lamdas: list, quartiles: int, tot_complaints: int, n_total_officers: int):
+def simulate_non_uniform(lamdas: list, quartiles:int):
     """
     This function simulates non-uniform complaints for a given list of yearly probability values, "lamdas",
-    using a Poisson distribution to generate the number of complaints per officer per year. The simulation
+    using a Poisson distribution to generate the number of complaints for each officer each year. The simulation
     continues until the total number of simulated complaints equals or exceeds the input value "tot_complaints".
     The function returns the decile sums of the simulated complaints, the number of years it took to reach the
     total number of simulated complaints, and the average probability of a complaint per officer per year.
@@ -146,11 +147,7 @@ def simulate_non_uniform(lamdas: list, quartiles: int, tot_complaints: int, n_to
     lamdas : list
         A list of yearly probability values for generating complaints using a Poisson distribution.
     quartiles : int
-        The number of quartiles to use in the simulation.
-    tot_complaints : int
-        The total number of complaints to simulate.
-    n_total_officers : int
-        The total number of officers in the simulation.
+        The length of the array to be returned.
 
     Returns:
     --------
@@ -161,6 +158,8 @@ def simulate_non_uniform(lamdas: list, quartiles: int, tot_complaints: int, n_to
     sim_av_prob : float
         The average probability of a complaint per officer per year.
     """
+    n_total_officers = 32493 ; # from https://en.wikipedia.org/wiki/Metropolitan_Police
+    tot_complaints = 58147; # total number of complaints in the data file 
 
     target_total = 0; poisson = []
     while target_total < tot_complaints or target_total == tot_complaints:
@@ -216,8 +215,9 @@ def beta_distr(a: float, b: float, quartiles: int):
    
     return np.random.beta(a, b, quartiles)
 
-    
-def simulate_lambdas(prms: np.ndarray, quartiles: int, tot_complaints: int, n_total_officers: int):
+
+
+def simulate_lambdas(prms: np.ndarray):
     """
     Given a set of input parameters, this function generates permutations of different "a" and "b" values for a 
     beta distribution. It then uses these values to compute decile probabilities of responsibility for a given 
@@ -231,13 +231,7 @@ def simulate_lambdas(prms: np.ndarray, quartiles: int, tot_complaints: int, n_to
     -----------
     prms : numpy array
         An array of "a" and "b" values for the beta distribution to be simulated.
-    quartiles : numpy array
-        An array of quartile values for the distribution of complaints among officers.
-    tot_complaints : int
-        The total number of complaints to be distributed among officers.
-    n_total_officers : int
-        The total number of officers in the simulation.
-
+   
     Returns:
     --------
     decile_responsible : numpy array
@@ -250,16 +244,17 @@ def simulate_lambdas(prms: np.ndarray, quartiles: int, tot_complaints: int, n_to
     labmdas_dec : numpy array
         An array of the decile probabilities of responsibility for each simulation.
     """
+    n_total_officers = 32493; 
+    quartiles = int(n_total_officers/100) # divide total # of officers into a 100 quartiles to reduce code running time 
 
     mesh = np.array(np.meshgrid(prms, prms)) # get permutations of different a and b values for the beta distribution
     combinations = mesh.T.reshape(-1, 2) 
-    
+
     decile_responsible = []; average_complaints = []; years_to_total = []; labmdas_dec = [] 
     for combination in tqdm.tqdm(combinations):
-        time.sleep(0.01)
         a = combination[0]; b = combination[1]
         lamdas = beta_distr(a,b, quartiles)
-        simulated, years_to, av = simulate_non_uniform(lamdas, quartiles, tot_complaints,n_total_officers)
+        simulated, years_to, av = simulate_non_uniform(lamdas, quartiles)
         yearly_prob = sort_lambdas(lamdas)
   
         decile_responsible.append(np.round(simulated[-1],1))
@@ -286,7 +281,7 @@ def sort_lambdas(lamdas: np.ndarray):
         An array of ten mean values, where each mean value represents the average lambda value within one of ten 
         equally-sized deciles of the sorted input array.
     """
-
+   
     srtd_lambdas = np.sort(lamdas)
     id_number = np.arange(len(lamdas));
     percentiles_id = []
@@ -299,5 +294,4 @@ def sort_lambdas(lamdas: np.ndarray):
     for i,ii in zip(percentiles_id[:-1],percentiles_id[1:]):
         deciles_sums.append(np.mean(srtd_lambdas[i:ii]))
     return np.asarray(deciles_sums)
-     
-        
+
