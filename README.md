@@ -103,4 +103,4 @@ This means that high % of cases accounted by the top decile can also mean that t
 summary sentence here
 
 ![](figures/simulating_complaints_with_beta_distributions_FINAL.png)  
-> summary caption here
+> > Higher % of cases accounted by the top decile of officers witht the most complaints can also mean that the police force is in fact receiving lower number of complaints, including the officers in the top decile.  
