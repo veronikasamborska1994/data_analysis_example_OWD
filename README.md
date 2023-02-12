@@ -40,6 +40,17 @@ In simulated data where all officers have an equal chance of getting a complaint
 
 </details>
 
+
+<details>
+<summary>Simulating a case where the probabilities of receiving a comlaint in each decile are proportional to the ratios in % of complaints received in each decile in MET data</summary>
+<br>
+
+Now let's simulate a case where each decile of police officers has a different chance of receiving a complaint. Here, the probability distribution is proportional to the distribution of the % of complaints in each decile in the MET data. Officers in the top decile will on average have at least one complaint a year. The resulting simulated distribution starts to match the real data much more closely. This suggests it is in fact possible that some officers are more likely to receive a complaint than others (this can be thought of as some model of [preferential attachment](https://en.wikipedia.org/wiki/Preferential_attachment)).
+
+![](figures/officer_complaints_simulated_vs_empirical_precferential_attachment.png)  
+
+</details>
+
 ## Major statistical issues and Summary
 
 
